@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import cl.duoc.foro.moderacion.exception.ManejadorErrores;
 import cl.duoc.foro.moderacion.security.RespuestasSeguridad;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(properties = "jwt.secreto=clave-solo-para-pruebas-de-mas-de-32-caracteres")
-@Import({SeguridadConfig.class, RespuestasSeguridad.class})
+// Sin filtros por defecto no se cargan los controladores: solo se prueba la seguridad
+@WebMvcTest(useDefaultFilters = false,
+        properties = "jwt.secreto=clave-solo-para-pruebas-de-mas-de-32-caracteres")
+@Import({SeguridadConfig.class, RespuestasSeguridad.class, ManejadorErrores.class})
 class SeguridadConfigTest {
 
     @Autowired
