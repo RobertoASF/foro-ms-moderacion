@@ -1,0 +1,3 @@
+-- Tablas del microservicio ms-moderacion.
+-- Se ejecuta conectado como FORO_MODERACION.
+-- Cada microservicio es dueño de su esquema: no se crean claves foráneas hacia otros esquemas.
