@@ -38,6 +38,11 @@ public class ManejadorErrores extends ResponseEntityExceptionHandler {
         return responder(HttpStatus.FORBIDDEN, ex.getMessage(), request.getRequestURI());
     }
 
+    @ExceptionHandler(ServicioNoDisponibleException.class)
+    public ResponseEntity<Object> noDisponible(ServicioNoDisponibleException ex, HttpServletRequest request) {
+        return responder(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage(), request.getRequestURI());
+    }
+
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Object> accesoDenegado(AccessDeniedException ex, HttpServletRequest request) {
         return responder(HttpStatus.FORBIDDEN, "No tienes permisos para esta acción", request.getRequestURI());
